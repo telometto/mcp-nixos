@@ -96,6 +96,7 @@
           pkgs.python311Packages.buildPythonApplication {
             pname = pyproject.project.name;
             inherit (pyproject.project) version;
+            meta.mainProgram = pyproject.project.name;
             
             src = ./.;
             
