@@ -111,7 +111,7 @@ jobs:
         run: |
           echo "Running tests excluding eval tests (eval tests are expensive - run locally when needed)"
           nix develop --command setup
-          nix develop --command bash -c 'run-tests -m "not anthropic"'
+          nix develop --command bash -c 'run-tests -m "not anthropic" --ignore-glob="**/test_*eval*.py"'
       
       - name: Upload coverage to Codecov
         if: always()
