@@ -129,7 +129,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment:
       name: AWS
-      url: https://mcp-nixos.utensils.io
+      url: https://mcp-nixos.io/
     permissions:
       id-token: write
     
