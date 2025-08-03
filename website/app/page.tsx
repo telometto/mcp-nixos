@@ -20,7 +20,7 @@ export default function Home() {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">MCP-NixOS</h1>
           <div className="mb-4">
             <span className="inline-block bg-nix-secondary text-white px-4 py-2 rounded-full text-sm font-semibold">
-              🎉 v1.0.0 - The Great Simplification
+              🎉 v1.0.1 - The Inevitable Bug Fix
             </span>
           </div>
           <div className="mb-8 max-w-3xl mx-auto">
@@ -149,11 +149,11 @@ export default function Home() {
               language="json" 
             />
             <p className="mt-6 text-gray-800 font-medium">
-              Start leveraging NixOS package information and configuration options in your workflow! For additional configuration options, see the <Link href="/docs#configuration" className="text-nix-primary hover:text-nix-dark underline transition-colors">configuration documentation</Link>.
+              Start leveraging NixOS package information and configuration options in your workflow!
             </p>
             <div className="text-center mt-12">
-              <Link href="/docs" className="btn-primary">
-                View Full Documentation
+              <Link href="/usage" className="btn-primary">
+                See All Configuration Options
               </Link>
             </div>
           </div>

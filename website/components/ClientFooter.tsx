@@ -16,24 +16,29 @@ export default function ClientFooter() {
             </p>
           </div>
 
-          {/* Column 2 - Documentation */}
+          {/* Column 2 - Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-nix-dark">Documentation</h3>
+            <h3 className="text-lg font-semibold mb-4 text-nix-dark">Quick Links</h3>
             <ul className="space-y-2 text-gray-600">
               <li>
-                <Link href="/docs" className="hover:text-nix-primary">
-                  Getting Started
+                <Link href="/usage" className="hover:text-nix-primary">
+                  Usage
                 </Link>
               </li>
               <li>
-                <Link href="/docs" className="hover:text-nix-primary">
-                  API Reference
+                <Link href="/about" className="hover:text-nix-primary">
+                  About
                 </Link>
               </li>
               <li>
-                <Link href="/docs" className="hover:text-nix-primary">
-                  Configuration
-                </Link>
+                <a 
+                  href="https://github.com/utensils/mcp-nixos/blob/main/README.md"
+                  className="hover:text-nix-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  README
+                </a>
               </li>
             </ul>
           </div>
