@@ -108,7 +108,7 @@ Brief description of the release focus (1-2 sentences).
 
 ## Installation
 
-\`\`\`bash
+```bash
 # Install with pip
 pip install mcp-nixos==X.Y.Z
 
@@ -117,17 +117,17 @@ uv pip install mcp-nixos==X.Y.Z
 
 # Install with uvx
 uvx mcp-nixos==X.Y.Z
-\`\`\`
+```
 
 ## Docker Images
 
-\`\`\`bash
+```bash
 # Pull from Docker Hub
 docker pull utensils/mcp-nixos:X.Y.Z
 
 # Pull from GitHub Container Registry
 docker pull ghcr.io/utensils/mcp-nixos:X.Y.Z
-\`\`\`
+```
 
 ## Migration Notes
 
@@ -184,18 +184,18 @@ Brief description of the release.
 
 ## Installation
 
-\`\`\`bash
+```bash
 pip install mcp-nixos==X.Y.Z
 # or
 uv pip install mcp-nixos==X.Y.Z
-\`\`\`
+```
 
 ## Docker Images
 
-\`\`\`bash
+```bash
 docker pull utensils/mcp-nixos:X.Y.Z
 docker pull ghcr.io/utensils/mcp-nixos:X.Y.Z
-\`\`\`
+```
 
 See [RELEASE_NOTES.md](https://github.com/utensils/mcp-nixos/blob/main/RELEASE_NOTES.md) for full details."
 ```
