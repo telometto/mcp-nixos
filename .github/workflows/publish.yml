@@ -166,3 +166,17 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         platforms: linux/amd64,linux/arm64
+
+    - name: Make GHCR package public
+      continue-on-error: true
+      run: |
+        echo "Setting GHCR package visibility to public..."
+        # Note: This requires the workflow to have admin permissions on the package
+        # If the package doesn't exist yet or permissions are insufficient, this will fail gracefully
+        gh api --method PATCH \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          "/orgs/utensils/packages/container/mcp-nixos" \
+          -f visibility=public || echo "Could not set visibility via API. Please set manually at: https://github.com/orgs/utensils/packages/container/mcp-nixos/settings"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
