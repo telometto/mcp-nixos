@@ -1,3 +1,115 @@
+# MCP-NixOS: v2.0.0 Release Notes - The Great Consolidation
+
+## Overview
+
+MCP-NixOS v2.0.0 is a major release that consolidates 17 MCP tools into just 2 unified tools, reducing token overhead by 95%. This release also adds comprehensive Nixvim support with 16,600+ configuration options.
+
+## Changes in v2.0.0
+
+### 🎯 Tool Consolidation (95% Token Reduction)
+
+- **Before**: 17 individual tools consuming ~15,000 tokens
+- **After**: 2 unified tools consuming ~1,400 tokens
+- **Result**: 95% reduction in token overhead
+
+New tools:
+- `nix` (769 tokens) - Unified query tool for search/info/stats/options/channels
+- `nix_versions` (643 tokens) - Package version history from NixHub.io
+
+### 🚀 Nixvim Support
+
+Added `nixvim` as a new source for the `nix` tool:
+
+- **16,647 options** fetched from NuschtOS search infrastructure
+- Supports all actions: search, info, stats, options browsing
+- Covers plugins (14,216), LSP (1,439), colorschemes (679), and more
+- Credits [NuschtOS/search](https://github.com/NuschtOS/search) for the data source
+
+### 🔧 Improvements
+
+- **Input Validation**: Added limit validation (1-100) for nix tool queries
+- **Type Safety**: Fixed `strip_html()` type hint to accept `str | None`
+- **Test Suite**: Comprehensive 114 tests (unit + integration)
+- **Edge Case Coverage**: Tests for channels, programs type, empty results
+
+### 🧹 Cleanup
+
+- Removed smithery integration
+- Removed orphaned `website/app/docs/claude.html` (17K+ lines)
+- Consolidated test files from 12 files to 3
+
+### 📦 Dependencies
+
+- No dependency changes
+- Maintained compatibility with FastMCP 2.x
+
+## Installation
+
+```bash
+# Install with pip
+pip install mcp-nixos==2.0.0
+
+# Install with uv
+uv pip install mcp-nixos==2.0.0
+
+# Install with uvx
+uvx mcp-nixos==2.0.0
+```
+
+## Docker Images
+
+```bash
+# Pull from Docker Hub
+docker pull utensils/mcp-nixos:2.0.0
+
+# Pull from GitHub Container Registry
+docker pull ghcr.io/utensils/mcp-nixos:2.0.0
+```
+
+## Migration Guide
+
+### ⚠️ Breaking Changes
+
+All 17 legacy tools have been removed. You must migrate to the new unified `nix` tool:
+
+| Old Tool | New Equivalent |
+|----------|----------------|
+| `nixos_search` | `nix action=search source=nixos` |
+| `nixos_info` | `nix action=info source=nixos` |
+| `nixos_stats` | `nix action=stats source=nixos` |
+| `home_manager_search` | `nix action=search source=home-manager` |
+| `home_manager_info` | `nix action=info source=home-manager` |
+| `home_manager_options` | `nix action=options source=home-manager` |
+| `darwin_search` | `nix action=search source=darwin` |
+| `darwin_info` | `nix action=info source=darwin` |
+| `darwin_options` | `nix action=options source=darwin` |
+| `flakes_search` | `nix action=search source=flakes` |
+| `nixos_flakes_search` | `nix action=search source=flakes` |
+| `nixos_channels` | `nix action=channels` |
+| `nix_versions` | `nix_versions` (unchanged) |
+
+### New Nixvim Queries
+
+```bash
+# Search Nixvim options
+nix action=search source=nixvim query=telescope
+
+# Get option info
+nix action=info source=nixvim query=plugins.telescope.enable
+
+# Browse plugin options
+nix action=options source=nixvim query=plugins
+
+# Get statistics
+nix action=stats source=nixvim
+```
+
+## Contributors
+
+- James Brink (@utensils) - Chief Consolidator
+
+---
+
 # MCP-NixOS: v1.1.0 Release Notes - NixOS 25.11 Stable
 
 ## Overview
