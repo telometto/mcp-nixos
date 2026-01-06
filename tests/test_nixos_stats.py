@@ -115,16 +115,15 @@ class TestNixOSStatsRegression:
             assert "• Options: 12,345" in result
 
 
-# ===== Content from test_package_counts_eval.py =====
-class TestPackageCountsEval:
-    """Test evaluations for getting package counts per NixOS channel."""
+class TestPackageCountsPerChannel:
+    """Test getting package counts per NixOS channel."""
 
     @patch("mcp_nixos.server.validate_channel")
     @patch("mcp_nixos.server.channel_cache")
     @patch("mcp_nixos.server.requests.post")
     @pytest.mark.asyncio
     async def test_get_package_counts_per_channel(self, mock_post, mock_cache, mock_validate):
-        """Eval: User wants package counts for each NixOS channel."""
+        """Test getting package counts for each NixOS channel."""
         # Setup channel mocks
         setup_channel_mocks(mock_cache, mock_validate)
 
@@ -275,7 +274,7 @@ class TestPackageCountsEval:
     @patch("mcp_nixos.server.requests.post")
     @pytest.mark.asyncio
     async def test_package_counts_with_beta_alias(self, mock_post, mock_cache, mock_validate):
-        """Eval: User asks about beta channel package count."""
+        """Test beta channel alias package count."""
         # Setup channel mocks
         setup_channel_mocks(mock_cache, mock_validate)
         # Mock responses for channel discovery
@@ -338,7 +337,7 @@ class TestPackageCountsEval:
     @patch("mcp_nixos.server.requests.post")
     @pytest.mark.asyncio
     async def test_compare_package_counts_across_channels(self, mock_post, mock_cache, mock_validate):
-        """Eval: User wants to compare package growth across releases."""
+        """Test comparing package counts across releases."""
         # Setup channel mocks
         setup_channel_mocks(mock_cache, mock_validate)
         # Mock responses with increasing package counts

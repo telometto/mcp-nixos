@@ -1,4 +1,4 @@
-"""Evaluation tests for flake search and improved stats functionality."""
+"""Tests for flake search and stats functionality."""
 
 from unittest.mock import MagicMock, Mock, patch
 
@@ -23,7 +23,7 @@ nixos_flakes_stats = get_tool_function("nixos_flakes_stats")
 nixos_search = get_tool_function("nixos_search")
 
 
-class TestFlakeSearchEvals:
+class TestFlakeSearchScenarios:
     """Test flake search functionality with real-world scenarios."""
 
     @pytest.fixture(autouse=True)
@@ -291,8 +291,8 @@ class TestFlakeSearchEvals:
         assert "Found 1 total matches (0 unique flakes)" in result
 
 
-class TestImprovedStatsEvals:
-    """Test improved stats functionality."""
+class TestStatsFormatting:
+    """Test stats output formatting."""
 
     @patch("requests.get")
     @pytest.mark.asyncio
@@ -1074,14 +1074,13 @@ class TestFlakeSearch:
         assert "Flake indices not found" in result
 
 
-# ===== Content from test_flakes_stats_eval.py =====
-class TestFlakesStatsEval:
-    """Test evaluations for flakes statistics and counting."""
+class TestFlakesStatsQueries:
+    """Test flakes statistics and counting queries."""
 
     @pytest.mark.asyncio
     @patch("mcp_nixos.server.requests.post")
     async def test_get_total_flakes_count(self, mock_post):
-        """Eval: User asks 'how many flakes are there?'"""
+        """Test getting total flakes count."""
 
         # Mock flakes stats responses
         def side_effect(*args, **kwargs):
@@ -1146,7 +1145,7 @@ class TestFlakesStatsEval:
     @pytest.mark.asyncio
     @patch("mcp_nixos.server.requests.post")
     async def test_flakes_search_shows_total_count(self, mock_post):
-        """Eval: Flakes search should show total matching flakes."""
+        """Test that flakes search shows total matching flakes."""
         # Mock search response with multiple hits
         mock_response = Mock()
         mock_response.status_code = 200
@@ -1192,7 +1191,7 @@ class TestFlakesStatsEval:
     @pytest.mark.asyncio
     @patch("mcp_nixos.server.requests.post")
     async def test_flakes_wildcard_search_shows_all(self, mock_post):
-        """Eval: User searches with '*' to see all flakes."""
+        """Test that wildcard search returns all flakes."""
         # Mock response with many flakes
         mock_response = Mock()
         mock_response.status_code = 200
@@ -1242,7 +1241,7 @@ class TestFlakesStatsEval:
     @pytest.mark.asyncio
     @patch("mcp_nixos.server.requests.post")
     async def test_flakes_stats_with_no_flakes(self, mock_post):
-        """Eval: Flakes stats when no flakes are indexed."""
+        """Test flakes stats when no flakes are indexed."""
 
         # Mock empty response
         def side_effect(*args, **kwargs):
@@ -1275,7 +1274,7 @@ class TestFlakesStatsEval:
     @pytest.mark.asyncio
     @patch("mcp_nixos.server.requests.post")
     async def test_flakes_stats_error_handling(self, mock_post):
-        """Eval: Flakes stats handles API errors gracefully."""
+        """Test that flakes stats handles API errors gracefully."""
         # Mock 404 error
         mock_response = Mock()
         mock_response.status_code = 404
@@ -1291,7 +1290,7 @@ class TestFlakesStatsEval:
     @pytest.mark.asyncio
     @patch("mcp_nixos.server.requests.post")
     async def test_compare_flakes_vs_packages(self, mock_post):
-        """Eval: User wants to understand flakes vs packages relationship."""
+        """Test comparing flakes and packages statistics."""
         # First call: flakes stats
         mock_flakes_response = Mock()
         mock_flakes_response.status_code = 200

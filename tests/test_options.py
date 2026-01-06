@@ -223,14 +223,13 @@ class TestNixosInfoOptionsIntegration:
         assert "services.completely.fake.option" in result
 
 
-# ===== Content from test_nixos_info_option_evals.py =====
-class TestNixosInfoOptionEvals:
-    """Evaluation tests for nixos_info with options."""
+class TestNixosInfoOptionScenarios:
+    """Test nixos_info option lookups in various scenarios."""
 
     @patch("mcp_nixos.server.es_query")
     @pytest.mark.asyncio
-    async def test_eval_services_nginx_enable_info(self, mock_query):
-        """Evaluate getting info about services.nginx.enable option."""
+    async def test_services_nginx_enable_info(self, mock_query):
+        """Test getting info about services.nginx.enable option."""
         # Mock the API response
         mock_query.return_value = [
             {
@@ -276,8 +275,8 @@ class TestNixosInfoOptionEvals:
 
     @patch("mcp_nixos.server.es_query")
     @pytest.mark.asyncio
-    async def test_eval_nested_option_lookup(self, mock_query):
-        """Evaluate looking up deeply nested options."""
+    async def test_nested_option_lookup(self, mock_query):
+        """Test looking up deeply nested options."""
         # Mock response for nested option
         mock_query.return_value = [
             {
@@ -300,8 +299,8 @@ class TestNixosInfoOptionEvals:
 
     @patch("mcp_nixos.server.es_query")
     @pytest.mark.asyncio
-    async def test_eval_option_not_found_behavior(self, mock_query):
-        """Evaluate behavior when option is not found."""
+    async def test_option_not_found_behavior(self, mock_query):
+        """Test behavior when option is not found."""
         # Mock empty response
         mock_query.return_value = []
 
@@ -315,8 +314,8 @@ class TestNixosInfoOptionEvals:
 
     @patch("mcp_nixos.server.es_query")
     @pytest.mark.asyncio
-    async def test_eval_common_options_lookup(self, mock_query):
-        """Evaluate looking up commonly used NixOS options."""
+    async def test_common_options_lookup(self, mock_query):
+        """Test looking up commonly used NixOS options."""
         common_options = [
             ("boot.loader.grub.enable", "boolean", "Whether to enable the GRUB boot loader"),
             ("networking.hostName", "string", "The hostname of the machine"),
@@ -344,8 +343,8 @@ class TestNixosInfoOptionEvals:
 
     @patch("mcp_nixos.server.es_query")
     @pytest.mark.asyncio
-    async def test_eval_option_with_complex_html(self, mock_query):
-        """Evaluate handling of options with complex HTML descriptions."""
+    async def test_option_with_complex_html(self, mock_query):
+        """Test handling of options with complex HTML descriptions."""
         mock_query.return_value = [
             {
                 "_source": {
@@ -380,8 +379,8 @@ class TestNixosInfoOptionEvals:
 
     @pytest.mark.integration
     @pytest.mark.asyncio
-    async def test_eval_real_option_lookup_integration(self):
-        """Integration test: evaluate real option lookup behavior."""
+    async def test_real_option_lookup_integration(self):
+        """Integration test for real option lookup behavior."""
         # Test with a real option that should exist
         result = await nixos_info("services.nginx.enable", type="option")
 

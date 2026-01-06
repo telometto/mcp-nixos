@@ -568,9 +568,8 @@ class TestNixHubFindVersion:
             assert result.count("b" * 40) == 1
 
 
-# ===== Content from test_nixhub_evals.py =====
-class TestNixHubEvaluations:
-    """Test expected AI assistant behaviors when using NixHub tools."""
+class TestNixHubVersionSearch:
+    """Test version search behavior with NixHub tools."""
 
     @pytest.mark.asyncio
     async def test_finding_older_ruby_version(self):
@@ -695,12 +694,12 @@ class TestNixHubEvaluations:
         assert v2_count_high >= v2_count_low, f"Higher limit should find at least as many v2 {package} versions"
 
 
-class TestNixHubAIBehaviorPatterns:
-    """Test patterns that AI assistants should follow when using NixHub."""
+class TestNixHubSearchPatterns:
+    """Test search patterns for finding older versions in NixHub."""
 
     @pytest.mark.asyncio
-    async def test_ai_should_try_higher_limits_for_older_versions(self):
-        """Document the pattern AI should follow for finding older versions."""
+    async def test_higher_limits_find_older_versions(self):
+        """Test that higher limits are needed to find older versions."""
         # Pattern 1: Start with default/low limit
         result1 = await nixhub_package_versions("ruby", limit=10)
 
@@ -715,8 +714,8 @@ class TestNixHubAIBehaviorPatterns:
         # This demonstrates the expected AI behavior pattern
 
     @pytest.mark.asyncio
-    async def test_ai_response_for_missing_version(self):
-        """Test how AI should respond when version is not found."""
+    async def test_response_for_missing_version(self):
+        """Test response when version is not found with default limit."""
         # Search for Ruby 3.0 with default limit
         result = await nixhub_package_versions("ruby", limit=10)
 
