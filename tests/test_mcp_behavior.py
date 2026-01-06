@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MCP behavior evaluation tests for real-world usage scenarios."""
+"""MCP behavior tests for real-world usage scenarios."""
 
 from unittest.mock import Mock, patch
 
@@ -67,8 +67,7 @@ class MockAssistant:
         return analysis
 
 
-@pytest.mark.evals
-class TestMCPBehaviorEvals:
+class TestMCPBehavior:
     """Test MCP tool behavior in realistic scenarios."""
 
     @pytest.mark.asyncio

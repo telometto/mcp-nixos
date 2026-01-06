@@ -344,7 +344,6 @@
                   eval "pytest tests/ -v $TEST_ARGS $COVERAGE_ARGS $JUNIT_ARGS $@"
                 else
                   echo "Running: pytest tests/ -v $COVERAGE_ARGS $JUNIT_ARGS $@"
-                  echo "Note: Running all tests including eval tests. In CI, eval tests are skipped for external contributors."
                   pytest tests/ -v $COVERAGE_ARGS $JUNIT_ARGS "$@"
                 fi
 
