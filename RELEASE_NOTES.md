@@ -1,3 +1,67 @@
+# MCP-NixOS: v1.1.0 Release Notes - NixOS 25.11 Stable
+
+## Overview
+
+MCP-NixOS v1.1.0 updates to NixOS 25.11 as the new stable channel, fixes the flakes search index, and improves CI/CD reliability with automatic retry handling for integration tests.
+
+## Changes in v1.1.0
+
+### 🚀 Channel Updates
+
+- **NixOS 25.11 Stable**: Updated stable channel to the latest NixOS 25.11 release
+- **Flakes Index Fix**: Fixed flakes search which was broken due to Elasticsearch index changes (#62)
+- **Dynamic Channel Discovery**: Improved channel detection to handle new NixOS releases automatically
+
+### 🔧 Bug Fixes
+
+- **Flaky Test Handling**: Added pytest-rerunfailures for automatic retry of integration tests on API timeouts (#63, #64)
+- **Portability Fix**: Changed `.mcp.json` to use relative paths for better cross-environment compatibility
+- **Test Stability**: All integration test classes now properly marked with flaky decorators
+
+### 🛠️ Development Experience
+
+- **Test Cleanup**: Removed eval test framework and renamed tests with descriptive names
+- **Documentation**: Updated README with accurate statistics and refreshed badges
+- **CI Reliability**: Integration tests now retry up to 3 times with 2-second delay on transient failures
+
+### 📦 Dependencies
+
+- Added `pytest-rerunfailures>=15.0` for flaky test handling
+- Maintained compatibility with FastMCP 2.x
+
+## Installation
+
+```bash
+# Install with pip
+pip install mcp-nixos==1.1.0
+
+# Install with uv
+uv pip install mcp-nixos==1.1.0
+
+# Install with uvx
+uvx mcp-nixos==1.1.0
+```
+
+## Docker Images
+
+```bash
+# Pull from Docker Hub
+docker pull utensils/mcp-nixos:1.1.0
+
+# Pull from GitHub Container Registry
+docker pull ghcr.io/utensils/mcp-nixos:1.1.0
+```
+
+## Migration Notes
+
+This is a drop-in replacement for v1.0.3. The "stable" channel alias now points to NixOS 25.11 instead of 25.05. If you explicitly use version-specific channels (e.g., `channel="25.05"`), your queries will continue to work unchanged.
+
+## Contributors
+
+- James Brink (@utensils) - NixOS 25.11 update and CI improvements
+
+---
+
 # MCP-NixOS: v1.0.3 Release Notes - Encoding Fix
 
 ## Overview
