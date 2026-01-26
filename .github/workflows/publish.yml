@@ -162,7 +162,7 @@ jobs:
         docker load < result
         VERSION="${{ steps.tag.outputs.version }}"
         for registry in "utensils/mcp-nixos" "ghcr.io/utensils/mcp-nixos"; do
-          docker tag ghcr.io/utensils/mcp-nixos:latest $registry:$VERSION-${{ matrix.arch }}
+          docker tag ghcr.io/utensils/mcp-nixos:$VERSION $registry:$VERSION-${{ matrix.arch }}
           docker push $registry:$VERSION-${{ matrix.arch }}
         done
 
