@@ -185,15 +185,18 @@ class TestChannelCache:
 class TestChannelValidation:
     """Test channel validation helpers."""
 
-    @patch("mcp_nixos.server.get_channels")
-    def test_valid_channel(self, mock_get):
-        mock_get.return_value = {"stable": "latest-44-nixos-25.11"}
+    @patch("mcp_nixos.sources.base.requests.post")
+    @patch("mcp_nixos.sources.base.get_channels")
+    def test_valid_channel(self, mock_get_channels, mock_post):
+        mock_get_channels.return_value = {"stable": "latest-44-nixos-25.11"}
+        mock_post.return_value.status_code = 200
+        mock_post.return_value.json.return_value = {"count": 100}
         result = validate_channel("stable")
         assert result is True
 
-    @patch("mcp_nixos.server.get_channels")
-    def test_invalid_channel(self, mock_get):
-        mock_get.return_value = {"stable": "latest-44-nixos-25.11"}
+    @patch("mcp_nixos.sources.base.get_channels")
+    def test_invalid_channel(self, mock_get_channels):
+        mock_get_channels.return_value = {"stable": "latest-44-nixos-25.11"}
         result = validate_channel("nonexistent")
         assert result is False
 
