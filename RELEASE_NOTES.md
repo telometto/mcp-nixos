@@ -1,3 +1,116 @@
+# MCP-NixOS: v2.2.0 Release Notes - Documentation Sources & Flake Inputs
+
+## Overview
+
+MCP-NixOS v2.2.0 adds three new documentation sources (NixOS Wiki, nix.dev, and Noogle) and a new `flake-inputs` action to explore local Nix store dependencies. This release significantly expands the knowledge accessible to AI assistants working with Nix.
+
+## Changes in v2.2.0
+
+### 🚀 New Documentation Sources
+
+Three new sources have been added to the `nix` tool:
+
+- **NixOS Wiki** (`source="wiki"`): Search and retrieve articles from wiki.nixos.org via MediaWiki API
+  - `action=search`: Find wiki articles by keyword
+  - `action=info`: Get full article content
+
+- **nix.dev** (`source="nix-dev"`): Search official Nix tutorials and guides
+  - `action=search`: Find documentation via Sphinx search index
+  - Covers tutorials, guides, and best practices
+
+- **Noogle** (`source="noogle"`): Search 2,000+ Nix built-in functions from noogle.dev
+  - `action=search`: Find functions by name or description
+  - `action=info`: Get function details with type signatures
+  - `action=stats`: View function statistics
+  - `action=options`: Browse functions by category (e.g., `lib.strings`)
+
+### 🔍 Flake Inputs Exploration
+
+New `flake-inputs` action to explore local Nix store dependencies (requires Nix):
+
+- `action=flake-inputs type=list`: List all flake inputs with their store paths
+- `action=flake-inputs type=ls query="nixpkgs:lib"`: Browse directories in inputs
+- `action=flake-inputs type=read query="nixpkgs:flake.nix"`: Read files from inputs
+
+Features:
+- Async subprocess execution with timeout handling
+- Security validation to keep paths within `/nix/store/`
+- Binary file detection and file size limits (up to 2000 lines)
+- Nested input flattening (e.g., `flake-parts.nixpkgs-lib`)
+
+### 🔧 Improvements & Bug Fixes
+
+- **CI/CD**: Updated GitHub Actions (checkout v6, upload/download-artifact v6/v7, setup-node v6)
+- **Documentation**: Added declarative Nix installation examples
+- **Docker**: Fixed tag generation to match flake version output
+- **Website**: Synced feature descriptions and updated dependencies
+
+### 📦 Dependencies
+
+- No Python dependency changes
+- Website dependencies updated (sharp, @types/node, eslint plugins)
+
+## Usage Examples
+
+```bash
+# Search NixOS Wiki
+nix action=search source=wiki query="nvidia drivers"
+
+# Get wiki article
+nix action=info source=wiki query="Flakes"
+
+# Search nix.dev tutorials
+nix action=search source=nix-dev query="first steps"
+
+# Search Nix functions
+nix action=search source=noogle query="map"
+
+# Get function info with type signature
+nix action=info source=noogle query="lib.strings.concatMapStrings"
+
+# List flake inputs (requires Nix)
+nix action=flake-inputs type=list
+
+# Browse input directory
+nix action=flake-inputs type=ls query="nixpkgs:lib/strings.nix"
+
+# Read file from input
+nix action=flake-inputs type=read query="nixpkgs:flake.nix"
+```
+
+## Installation
+
+```bash
+# Install with pip
+pip install mcp-nixos==2.2.0
+
+# Install with uv
+uv pip install mcp-nixos==2.2.0
+
+# Run directly with nix
+nix run github:utensils/mcp-nixos
+```
+
+## Docker Images
+
+```bash
+# Pull from Docker Hub
+docker pull utensils/mcp-nixos:2.2.0
+
+# Pull from GitHub Container Registry
+docker pull ghcr.io/utensils/mcp-nixos:2.2.0
+```
+
+## Migration Notes
+
+This is a drop-in replacement for v2.1.1. All new features are additive with no breaking changes. Existing queries continue to work unchanged.
+
+## Contributors
+
+- James Brink (@utensils) - Documentation sources and flake-inputs implementation
+
+---
+
 # MCP-NixOS: v2.1.1 Release Notes - Stable Python Compatibility
 
 ## Overview
@@ -12,7 +125,7 @@ MCP-NixOS v2.1.1 fixes the Nix flake by using the stable python in nixpkgs.
 
 ## Contributors
 
-- Malix - Alix Brunet (@Malix-Labs) 
+- Malix - Alix Brunet (@Malix-Labs)
 
 ---
 
