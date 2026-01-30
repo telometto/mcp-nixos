@@ -18,6 +18,7 @@ from mcp_nixos.server import (
 )
 
 
+@pytest.mark.unit
 class TestErrorFunction:
     """Test error formatting helper."""
 
@@ -38,6 +39,7 @@ class TestErrorFunction:
         assert result == "Error (ERROR): "
 
 
+@pytest.mark.unit
 class TestElasticsearchQuery:
     """Test Elasticsearch query helper."""
 
@@ -93,6 +95,7 @@ class TestElasticsearchQuery:
         assert result == []
 
 
+@pytest.mark.unit
 class TestParseHtmlOptions:
     """Test HTML option parsing."""
 
@@ -147,6 +150,7 @@ class TestParseHtmlOptions:
             parse_html_options(HOME_MANAGER_URL)
 
 
+@pytest.mark.unit
 class TestChannelCache:
     """Test channel cache functionality."""
 
@@ -177,6 +181,7 @@ class TestChannelCache:
         assert isinstance(result, dict)
 
 
+@pytest.mark.unit
 class TestChannelValidation:
     """Test channel validation helpers."""
 
