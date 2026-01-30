@@ -170,6 +170,55 @@ nix run github:utensils/mcp-nixos
 nix profile install github:utensils/mcp-nixos
 ```
 
+### Declarative Installation (NixOS / Home Manager / nix-darwin)
+
+mcp-nixos is available in [nixpkgs](https://search.nixos.org/packages?channel=unstable&show=mcp-nixos&query=mcp-nixos):
+
+```nix
+# NixOS (configuration.nix)
+environment.systemPackages = [ pkgs.mcp-nixos ];
+
+# Home Manager (home.nix)
+home.packages = [ pkgs.mcp-nixos ];
+
+# nix-darwin (darwin-configuration.nix)
+environment.systemPackages = [ pkgs.mcp-nixos ];
+```
+
+Or use the flake directly with the provided overlay:
+
+```nix
+# flake.nix
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    mcp-nixos.url = "github:utensils/mcp-nixos";
+  };
+
+  outputs = { self, nixpkgs, mcp-nixos, ... }: {
+    # Example: NixOS configuration
+    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [{
+        nixpkgs.overlays = [ mcp-nixos.overlays.default ];
+        environment.systemPackages = [ pkgs.mcp-nixos ];
+      }];
+    };
+
+    # Example: Home Manager standalone
+    homeConfigurations.myuser = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        overlays = [ mcp-nixos.overlays.default ];
+      };
+      modules = [{
+        home.packages = [ pkgs.mcp-nixos ];
+      }];
+    };
+  };
+}
+```
+
 ## Development
 
 ```bash
