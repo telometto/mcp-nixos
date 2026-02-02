@@ -4,7 +4,7 @@
 
 MCP-NixOS is a Model Context Protocol (MCP) server providing real-time information about NixOS packages, options, Home Manager, nix-darwin, and flakes. The server prevents AI hallucination by querying official APIs and documentation sources.
 
-**Architecture:** Modular FastMCP 2.x async server exposing only 2 MCP tools (consolidated from 17 in v1.0 to reduce context window usage).
+**Architecture:** Modular FastMCP 3.x async server exposing only 2 MCP tools (consolidated from 17 in v1.0 to reduce context window usage).
 
 **Key Modules:**
 - `mcp_nixos/server.py` - MCP tools, routing, and entry point
@@ -83,10 +83,10 @@ Errors must be plain text, human-readable, and actionable.
 
 ### 5. Async Tool Implementation
 
-All MCP tools use FastMCP 2.x async decorators:
+All MCP tools use FastMCP 3.x async decorators:
 
 ```python
-@mcp.tool()
+@mcp.tool
 async def nix(...) -> str:
     # For async HTTP calls, use async patterns
     result = await _search_nixhub(query, limit)
