@@ -138,7 +138,7 @@ mcp = FastMCP("mcp-nixos")
 # =============================================================================
 
 
-@mcp.tool()
+@mcp.tool
 async def nix(
     action: Annotated[str, "search|info|stats|options|channels|flake-inputs|cache"],
     query: Annotated[str, "Search term, name, or prefix. For flake-inputs: input_name or input:path"] = "",
@@ -284,7 +284,7 @@ async def nix(
         return error("Action must be search|info|stats|options|channels|flake-inputs|cache")
 
 
-@mcp.tool()
+@mcp.tool
 async def nix_versions(
     package: Annotated[str, "Package name"],
     version: Annotated[str, "Specific version to find"] = "",
