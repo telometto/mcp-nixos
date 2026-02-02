@@ -69,7 +69,7 @@ export default function AboutPage() {
           <section className="mb-16 bg-nix-light bg-opacity-30 rounded-lg p-6 shadow-sm">
             <AnchorHeading level={2} className="text-2xl font-bold mb-6 text-nix-primary border-b border-nix-light pb-2">Architecture</AnchorHeading>
             <p className="mb-6 text-gray-800">
-              MCP-NixOS v2.x follows a simple, stateless design with all functionality in a single FastMCP 2.x async server module.
+              MCP-NixOS v2.x follows a simple, stateless design with all functionality in a single FastMCP 3.x async server module.
             </p>
             <ul className="grid gap-3 mb-6">
               {[
